@@ -1,0 +1,101 @@
+[
+  {
+    "country": "Albania",
+    "unTrendyBody": [
+      {
+        "committee": "CCPR",
+        "individualComplaint": "yes",
+        "IndividualComplaintLink": "https://www.ohchr.org/en/documents/tools-and-resources/form-and-guidance-submitting-individual-communication-treaty-bodies",
+        "inquiry": ""
+      },
+      {
+        "committee": "CEDAW",
+        "individualComplaint": "yes",
+        "IndividualComplaintLink": "https://www.ohchr.org/en/documents/tools-and-resources/form-and-guidance-submitting-individual-communication-treaty-bodies",
+        "inquiry": "https://www.ohchr.org/en/treaty-bodies/complaints-about-human-rights-violations#inquiries"
+      },
+      {
+        "committee": "CAT",
+        "individualComplaint": "yes",
+        "IndividualComplaintLink": "",
+        "inquiry": "https://www.ohchr.org/en/treaty-bodies/complaints-about-human-rights-violations#inquiries"
+      },
+      {
+        "committee": "CRC",
+        "individualComplaint": "yes",
+        "IndividualComplaintLink": "https://www.ohchr.org/en/documents/tools-and-resources/form-and-guidance-submitting-individual-communication-treaty-bodies",
+        "inquiry": "https://www.ohchr.org/en/treaty-bodies/complaints-about-human-rights-violations#inquiries"
+      },
+      {
+        "committee": "CED",
+        "individualComplaint": "yes",
+        "IndividualComplaintLink": "https://www.ohchr.org/en/documents/tools-and-resources/form-and-guidance-submitting-individual-communication-treaty-bodies",
+        "inquiry": "https://www.ohchr.org/en/treaty-bodies/complaints-about-human-rights-violations#inquiries"
+      }
+    ],
+    "regionalHumanRightsMechanism": [      
+        {
+          "institution": "ECtHR",
+          "individualComplaint": "yes",
+          "individualComplaintLink": "https://r39.echr.coe.int/"
+        }
+    ]
+  },
+  {
+    "country": "Benin",
+    "unTrendyBody": [
+      {
+        "committee": "CCPR",
+        "individualComplaint": "yes",
+        "IndividualComplaintLink": "https://www.ohchr.org/en/documents/tools-and-resources/form-and-guidance-submitting-individual-communication-treaty-bodies",
+        "inquiry": ""
+      },
+      {
+        "committee": "CEDAW",
+        "individualComplaint": "yes",
+        "IndividualComplaintLink": "https://www.ohchr.org/en/documents/tools-and-resources/form-and-guidance-submitting-individual-communication-treaty-bodies",
+        "inquiry": "https://www.ohchr.org/en/treaty-bodies/complaints-about-human-rights-violations#inquiries"
+      },
+      {
+        "committee": "CAT",
+        "individualComplaint": "",
+        "IndividualComplaintLink": "",
+        "inquiry": "https://www.ohchr.org/en/treaty-bodies/complaints-about-human-rights-violations#inquiries"
+      },
+      {
+        "committee": "CRC",
+        "individualComplaint": "yes",
+        "IndividualComplaintLink": "https://www.ohchr.org/en/documents/tools-and-resources/form-and-guidance-submitting-individual-communication-treaty-bodies",
+        "inquiry": "https://www.ohchr.org/en/treaty-bodies/complaints-about-human-rights-violations#inquiries"
+      },
+      {
+        "committee": "CRPD",
+        "individualComplaint": "yes",
+        "IndividualComplaintLink": "https://www.ohchr.org/en/documents/tools-and-resources/form-and-guidance-submitting-individual-communication-treaty-bodies",
+        "inquiry": "https://www.ohchr.org/en/treaty-bodies/complaints-about-human-rights-violations#inquiries"
+      }
+    ],
+    "regionalHumanRightsMechanism": [      
+        {
+          "institution": "ACtHPR",
+          "individualComplaint": "yes",
+          "individualComplaintLink": "https://www.african-court.org/wpafc/how-to-file-a-case/"
+        },
+        {
+          "institution": "ACHPR",
+          "individualComplaint": "yes",
+          "individualComplaintLink": "https://achpr.au.int/en/guidelines-submitting-complaints"
+        },
+        {
+          "institution": "ACERWC",
+          "individualComplaint": "yes",
+          "individualComplaintLink": "https://www.acerwc.africa/en/page/guidelines-consideration-communications-and-monitoring-implementation-decisions"
+        },
+        {
+          "institution": "ECOWAS",
+          "individualComplaint": "yes",
+          "individualComplaintLink": "http://www.courtecowas.org/practical-information"
+        }
+    ]
+  }
+]
