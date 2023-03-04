@@ -11,7 +11,7 @@
     },
     {
       "country": "Algeria",
-      "UNTreatyBody": [ "CERD", "CCPPS", "CAT"],
+      "UNTreatyBody": [ "CERD", "CCPR", "CAT"],
       "regionalHumanRightsMechanism": ["ACHPR", "ACERWC"]
     },
     {
@@ -41,7 +41,7 @@
     },
     {
       "country": "Aruba",
-      "UNTreatyBody": [ "CERD", "CESCR", "CED"],
+      "UNTreatyBody": [ "CERD", "CESCR","CCPR","CAT", "CED"],
       "regionalHumanRightsMechanism": [""]
     },
     {
@@ -76,7 +76,17 @@
     },
     {
       "country": "Belgium",
-      "UNTreatyBody": [ "CERD","CCPR", "CEDAW", "CAT", "CRPD", "CED"],
+      "UNTreatyBody": [ "CERD","CESCR","CCPR", "CEDAW", "CAT","CRC", "CRDP", "CED"],
+      "regionalHumanRightsMechanism": ["ECtHR", "Frontex"]
+    },
+    {
+      "country": "Belize",
+      "UNTreatyBody": [  "CEDAW", "CAT"],
+      "regionalHumanRightsMechanism": ["ECtHR", "Frontex"]
+    },
+    {
+      "country": "Benin",
+      "UNTreatyBody": [  "CCPR", "CEDAW", "CAT","CRC", "CRPD"],
       "regionalHumanRightsMechanism": ["ECtHR", "Frontex"]
     },
     {
@@ -108,32 +118,7 @@
       "country": "Brunei",
       "UNTreatyBody": [""],
       "regionalHumanRightsMechanism": [""]
-    },
-    {
-      "country": "Bolivia",
-      "UNTreatyBody": [ "CERD", "CESCR", "CCPR", "CEDAW", "CAT", "CRC", "CRPD", "CED"],
-      "regionalHumanRightsMechanism": ["IACHR"]
-    }, 
-    {
-      "country": "Bosnia and Herzegovina",
-      "UNTreatyBody": [ "CESCR","CCPR","CEDAW","CAT","CRPD","CED"],
-      "regionalHumanRightsMechanism": [""]
-    },
-    {
-      "country": "Botswana",
-      "UNTreatyBody": ["CEDAW","CAT"],
-      "regionalHumanRightsMechanism": [""]
-    },
-    {
-      "country": "Brazil",
-      "UNTreatyBody": ["CERD","CCPR","CEDAW","CAT","CRC","CRDP"],
-      "regionalHumanRightsMechanism": [""]
-    },
-    {
-      "country": "Brunei",
-      "UNTreatyBody": [""],
-      "regionalHumanRightsMechanism": [""]
-    },
+    },   
     {
       "country": "Bulgaria",
       "UNTreatyBody": ["CERD","CCPR","CEDAW","CAT"],
@@ -160,7 +145,7 @@
       "regionalHumanRightsMechanism": [""]
     },
     {
-      "country": "Cambodia",
+      "country": "Cameroon",
       "UNTreatyBody": ["CCPR","CEDAW","CAT"],
       "regionalHumanRightsMechanism": [""]
     },
@@ -347,7 +332,7 @@
       "regionalHumanRightsMechanism": [""]
     },
     {
-      "country": "Georgia",
+      "country": "Germany",
       "UNTreatyBody": ["CERD","CCPR","CEDAW","CAT","CRC","CRPD","CED"],
       "regionalHumanRightsMechanism": [""]
     },
@@ -883,7 +868,7 @@
     },
     {
       "country": "State of Palestine",
-      "UNTreatyBody": ["CCPR","CEDAW","CAT","CRPD"],
+      "UNTreatyBody": ["CERD","CEDAW","CAT","CRPD"],
       "regionalHumanRightsMechanism": [""]
     },
     {
