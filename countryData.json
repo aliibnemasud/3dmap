@@ -119,10 +119,30 @@
       "UNTreatyBody": [ "CESCR","CCPR","CEDAW","CAT","CRPD","CED"],
       "regionalHumanRightsMechanism": [""]
     },
+    {
+      "country": "Botswana",
+      "UNTreatyBody": ["CEDAW","CAT"],
+      "regionalHumanRightsMechanism": [""]
+    },
+    {
+      "country": "Brazil",
+      "UNTreatyBody": ["CERD","CCPR","CEDAW","CAT","CRC","CRDP"],
+      "regionalHumanRightsMechanism": [""]
+    },
+    {
+      "country": "Brunei",
+      "UNTreatyBody": [""],
+      "regionalHumanRightsMechanism": [""]
+    },
+    {
+      "country": "Bulgaria",
+      "UNTreatyBody": ["CERD","CCPR","CEDAW","CAT"],
+      "regionalHumanRightsMechanism": [""]
+    },
 
 
 
 
-    {}   
+    {}
 ]
   
