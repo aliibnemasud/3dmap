@@ -11,13 +11,28 @@
     </style>
     <script src="//unpkg.com/d3"></script>
     <script src="//unpkg.com/globe.gl"></script>
+
+    <style>
+      #popup-container {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: none;
+        background-color: #fff;
+        padding: 20px;
+        border: 1px solid #ccc;
+      }
+    </style>
+
     <title>Colored Path</title>
   </head>
   <body>
     <div id="globeViz"></div>
-    <div>
-      <h1 style="z-index: 1; color: aliceblue">Hello</h1>
-    </div>
+
+    <!-- <button onclick="showPopup()">Show Popup</button> -->
+
+    <div id="popup-container"></div>
 
     <script>
       const colorScale = d3.scaleSequentialSqrt(d3.interpolateYlOrRd);
@@ -25,20 +40,13 @@
       // GDP per capita (avoiding countries with small pop)
       const getVal = (feat) => feat.properties.GDP_MD_EST / Math.max(1e5, feat.properties.POP_EST);
 
-      fetch("ne_110m_admin_0_countries.geojson")
+      fetch("updated_admin_countries.geojson")
         .then((res) => res.json())
         .then((countries) => {
           const maxVal = Math.max(...countries.features.map(getVal));
           colorScale.domain([0, maxVal]);
 
-          console.log(countries)
-
-           /* fetch("https://firms.modaps.eosdis.nasa.gov/api/area/csv/945358277deb8f8bf0560ff3f0fc15bb/VIIRS_SNPP_NRT/world/1/2023-03-03")
-            .then((r) => r.json())
-            .then((landingSites) => {
-             //world.pointsData(landingSites);
-            console.log(landingSites)
-            }); */
+          // console.log(countries)
 
           const world = Globe()
             .globeImageUrl("//unpkg.com/three-globe/example/img/earth-night.jpg")
@@ -49,20 +57,49 @@
             .polygonCapColor((feat) => colorScale(getVal(feat)))
             .polygonSideColor(() => "rgba(0, 100, 0, 0.15)")
             .polygonStrokeColor(() => "#111")
-            .onPolygonClick((data) => {
-              // console.log(data?.properties.BRK_NAME)
-              alert(data?.properties.BRK_NAME);
+            .onPolygonClick(({ properties: d }) => {
+              showPopup(`<div>
+                <h4>Country Name: ${d.BRK_NAME}</h4><br />
+          UN Treaty Body: <ul>${d.UNTreatyBody?.map((un) => {
+            return `<li>${un}</li>`;
+          })} </ul>
+          Regional Human Rights Mechanism: <ul>${d?.regionalHumanRightsMechanism?.map((un) => {
+            return `<li>${un}</li>`;
+          })} </ul>
+          <button onclick="hidePopup()">Close</button>
+                </div>`);              
             })
-            .pointsData(data =>  console.log(data))           
+            
             .polygonLabel(
               ({ properties: d }) => `
-          <b>${d.BRK_NAME} (${d.ISO_A2}):</b> <br />
-          GDP: <i>${d.GDP_MD_EST}</i> M$<br/>
-          Population: <i>${d.POP_EST}</i>
+          <b>${d.BRK_NAME}</b><br />
+          UN Treaty Body: <ul>${d.UNTreatyBody?.map((un) => {
+            return `<li>${un}</li>`;
+          })}</ul>
         `)
             .onPolygonHover((hoverD) => world.polygonAltitude((d) => (d === hoverD ? 0.12 : 0.06)).polygonCapColor((d) => (d === hoverD ? "steelblue" : colorScale(getVal(d)))))
             .polygonsTransitionDuration(300)(document.getElementById("globeViz"));
         });
+    </script>
+
+    <script>
+      const popup = document.querySelector("#popup-container");
+
+      function showPopup(data) {
+        popup.innerHTML = data;
+        popup.style.display = "block";
+      }
+
+      function hidePopup() {
+        popup.style.display = "none";
+        document.removeEventListener("click", hidePopupOnClickOutside);
+      }
+
+      function hidePopupOnClickOutside(event) {
+        if (!popup.contains(event.target)) {
+          hidePopup();
+        }
+      }
     </script>
 
     <!-- <script src="./index.js"></script> -->
