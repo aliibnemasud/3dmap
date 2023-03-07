@@ -23,9 +23,16 @@
         padding: 20px;
         border: 1px solid #ccc;
       }
+
+      #popup-hover {        
+        background-color: rgb(151, 98, 0);
+        padding: 30px;
+        
+      }
+
     </style>
 
-    <title>Colored Path</title>
+    <title>Country Data</title>
   </head>
   <body>
     <div id="globeViz"></div>
@@ -46,7 +53,7 @@
           const maxVal = Math.max(...countries.features.map(getVal));
           colorScale.domain([0, maxVal]);
 
-          // console.log(countries)
+          console.log(countries)
 
           const world = Globe()
             .globeImageUrl("//unpkg.com/three-globe/example/img/earth-night.jpg")
@@ -72,10 +79,12 @@
             
             .polygonLabel(
               ({ properties: d }) => `
-          <b>${d.BRK_NAME}</b><br />
+          <div id="popup-hover" >
+            <b>${d.BRK_NAME}</b><br />
           UN Treaty Body: <ul>${d.UNTreatyBody?.map((un) => {
             return `<li>${un}</li>`;
           })}</ul>
+            </div>
         `)
             .onPolygonHover((hoverD) => world.polygonAltitude((d) => (d === hoverD ? 0.12 : 0.06)).polygonCapColor((d) => (d === hoverD ? "steelblue" : colorScale(getVal(d)))))
             .polygonsTransitionDuration(300)(document.getElementById("globeViz"));
@@ -101,7 +110,6 @@
         }
       }
     </script>
-
-    <!-- <script src="./index.js"></script> -->
+    
   </body>
 </html>
