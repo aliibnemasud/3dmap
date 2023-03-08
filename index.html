@@ -64,9 +64,6 @@
             .polygonSideColor(() => "rgba(0, 100, 0, 0.15)")
             .polygonStrokeColor(() => "#111")
             .onPolygonClick(({ properties: d }) => {
-
-              
-              
               let committeesDetailsData = [];
               fetch("UNTrendyBody.json")
                 .then((res) => res.json())
@@ -74,21 +71,21 @@
                   let committees = d.UNTreatyBody;
                   let institutions = d.regionalHumanRightsMechanism;
 
-                  console.log(institutions)
+                  console.log(institutions);
 
-                  console.log(committeesDetails)
+                  console.log(committeesDetails);
 
                   let UNTrendyBodyData = committeesDetails?.UNTrendyBody?.filter(function (item) {
                     return committees.indexOf(item?.committee) !== -1;
                   });
 
                   let regionalHumanRightsMechanismData = committeesDetails?.regionalOnes?.filter(function (item) {
-                    console.log(item)
+                    console.log(item);
                     return institutions.indexOf(item?.institution) !== -1;
-                  });                  
+                  });
 
                   let RegionalHuman = [
-                  `<p>Regional Human Rights Mechanism:</p> <ul>${regionalHumanRightsMechanismData?.map((un) => {
+                    `<p>Regional Human Rights Mechanism:</p> <ul>${regionalHumanRightsMechanismData?.map((un) => {
                       return `<li><a target="_blank" href=${un?.IndividualComplaint}>${un?.institution}</a></li>`;
                     })} </ul>`,
                   ];
@@ -98,13 +95,13 @@
           UN Treaty Body: <ul>${UNTrendyBodyData?.map((un) => {
             return `<li><a target="_blank" href=${un?.individualComplaintLink}>${un?.committee}</a></li>`;
           })} </ul>
-                ${ d?.regionalHumanRightsMechanism[0].length === 0 ? '': RegionalHuman}
+                ${d?.regionalHumanRightsMechanism[0].length === 0 ? "" : RegionalHuman}
           <button onclick="hidePopup()">Close</button>
                 </div>`);
                 });
             })
 
-            .polygonLabel(
+            /* .polygonLabel(
               ({ properties: d }) => `
           <div id="popup-hover" >
             <b>${d.BRK_NAME}</b><br />
@@ -112,8 +109,7 @@
             return `<li>${un}</li>`;
           })}</ul>
             </div>
-        `
-            )
+        `) */
             .onPolygonHover((hoverD) => world.polygonAltitude((d) => (d === hoverD ? 0.12 : 0.06)).polygonCapColor((d) => (d === hoverD ? "steelblue" : colorScale(getVal(d)))))
             .polygonsTransitionDuration(300)(document.getElementById("globeViz"));
         });
