@@ -71,16 +71,11 @@
                   let committees = d.UNTreatyBody;
                   let institutions = d.regionalHumanRightsMechanism;
 
-                  console.log(institutions);
-
-                  console.log(committeesDetails);
-
                   let UNTrendyBodyData = committeesDetails?.UNTrendyBody?.filter(function (item) {
                     return committees.indexOf(item?.committee) !== -1;
                   });
 
                   let regionalHumanRightsMechanismData = committeesDetails?.regionalOnes?.filter(function (item) {
-                    console.log(item);
                     return institutions.indexOf(item?.institution) !== -1;
                   });
 
