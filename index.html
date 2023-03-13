@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css">
     <style>
       body {
         margin: 0;
@@ -15,13 +16,13 @@
     <style>
       #popup-container {
         position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        top: 0%;
+        right: 0%;        
         display: none;
         background-color: #fff;
         padding: 20px;
         border: 1px solid #ccc;
+        height: 100vh;          
       }
 
       #popup-hover {
@@ -30,6 +31,9 @@
       }
     </style>
 
+
+
+
     <title>Country Data</title>
   </head>
   <body>
@@ -37,7 +41,7 @@
 
     <!-- <button onclick="showPopup()">Show Popup</button> -->
 
-    <div id="popup-container"></div>
+    <div id="popup-container" ></div>
     <a href=""></a>
 
     <script>
@@ -60,9 +64,13 @@
             .lineHoverPrecision(0)
             .polygonsData(countries.features.filter((d) => d.properties.ISO_A2 !== "AQ"))
             .polygonAltitude(0.06)
-            .polygonCapColor((feat) => colorScale(getVal(feat)))
-            .polygonSideColor(() => "rgba(0, 100, 0, 0.15)")
-            .polygonStrokeColor(() => "#111")
+            .polygonCapColor((feat) => {
+              //return  feat?.properties?.color // we can change the property with the country
+             return colorScale(getVal(feat))
+              //console.log()
+            })  // color is coming from there 
+            .polygonSideColor(() => "rgba(0, 100, 0, 0.15)")  // ground color
+            .polygonStrokeColor(() => "#111") 
             .onPolygonClick(({ properties: d }) => {
               let committeesDetailsData = [];
               fetch("UNTrendyBody.json")
@@ -81,14 +89,14 @@
 
                   let RegionalHuman = [
                     `<p>Regional Human Rights Mechanism:</p> <ul>${regionalHumanRightsMechanismData?.map((un) => {
-                      return `<li><a target="_blank" href=${un?.IndividualComplaint}>${un?.institution}</a></li>`;
+                      return `<li><a target="_blank" href=${un?.IndividualComplaint}>${un?.abbreviations}</a></li>`;
                     })} </ul>`,
                   ];
 
                   showPopup(`<div>
                 <h4>${d.BRK_NAME}</h4>
           UN Treaty Body: <ul>${UNTrendyBodyData?.map((un) => {
-            return `<li><a target="_blank" href=${un?.individualComplaintLink}>${un?.committee}</a></li>`;
+            return `<li><a target="_blank" href=${un?.individualComplaintLink}>${un?.abbreviations}</a></li>`;
           })} </ul>
                 ${d?.regionalHumanRightsMechanism[0].length === 0 ? "" : RegionalHuman}
           <button onclick="hidePopup()">Close</button>
@@ -105,7 +113,13 @@
           })}</ul>
             </div>
         `) */
-            .onPolygonHover((hoverD) => world.polygonAltitude((d) => (d === hoverD ? 0.12 : 0.06)).polygonCapColor((d) => (d === hoverD ? "steelblue" : colorScale(getVal(d)))))
+        // 
+            .onPolygonHover((hoverD) => world.polygonAltitude((d) => (d === hoverD ? 0.12 : 0.06))
+            .polygonCapColor((d) => {
+              //console.log("only d", d)
+              // console.log('hoverD', hoverD)
+                 (d === hoverD ? "steelblue" : colorScale(getVal(d)))
+            }))
             .polygonsTransitionDuration(300)(document.getElementById("globeViz"));
         });
     </script>
