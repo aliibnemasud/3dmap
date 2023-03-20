@@ -30,3 +30,22 @@
   .popup p {
     margin-bottom: 0;
   }
+
+  .closeBtn {
+    border: none;
+    background: transparent;
+    display: block;
+    text-align: center;
+  }
+
+  .closeBtn i {
+    font-size: 40px;
+    coursor: pointer;
+  }
+
+  .btnDiv {
+    display: grid
+    /* text-align: center;
+    width: 100%;
+    margin: 0 auto; */
+  }
