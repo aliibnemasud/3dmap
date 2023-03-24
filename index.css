@@ -40,7 +40,10 @@
 
   .closeBtn i {
     font-size: 40px;
-    coursor: pointer;
+    cursor: pointer;   
+  }
+  .closeBtn i:hover {
+    color: red;
   }
 
   .btnDiv {
@@ -48,4 +51,9 @@
     /* text-align: center;
     width: 100%;
     margin: 0 auto; */
+  }
+
+  .top-part {
+    display: flex;
+    justify-content: space-between;   
   }
