@@ -53,3 +53,5 @@ function animate() {
   renderer.render( scene, camera );
 }
 animate();
+
+// Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'length')

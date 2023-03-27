@@ -28,7 +28,7 @@
         border-radius: 2%;
         background-color: rgb(216, 248, 248);
         width: 20%;
-        height: 50%;
+        height: 60%;
         overflow: scroll;
       }
 
@@ -42,18 +42,16 @@
         top: 30%;
         bottom: 0%;
         display: block;
-        background-color: #fff;
+        /* background-color: #fff; */
         padding: 1%;
-        border: 1px solid #ccc;
-        margin: 2%;
-        border-radius: 1%;
-        background-color: rgb(216, 248, 248);
-        width: 20%;
+        /* border: 1px solid #ccc; */
+        /* margin: 2%; */
+        /* border-radius: 1%; */
+        /* background-color: rgb(216, 248, 248); */
+        width: 30%;
         height: 60%;
-        overflow: scroll;
-      }      
-
-
+        /* overflow: scroll; */
+      }
     </style>
     <title>Country Data</title>
   </head>
@@ -67,7 +65,7 @@
     </div>
 
     <div id="table">
-      <h3>HR Mechanisms Applicable in All States</h3>
+      <h3 style="color: azure; text-align: center;">HR Mechanisms Applicable in All States</h3>
       <table id="customers">
         <tr>
           <th>Institution</th>
@@ -79,49 +77,45 @@
         <tr>
           <td>Human Rights Council</td>
           <td>
-            <ul>
+            <ol>
               <li><p>Special Procedures</p></li>
               <li><p>HRC Complaint Procedure</p></li>
-            </ul>
+            </ol>
           </td>
           <td>
-            <ul>
+            <ol>
               <li><p>Working Groups</p></li>
               <li><p>Special Rapporteurs</p></li>
               <li><p>Working Groups</p></li>
-            </ul>
+            </ol>
           </td>
 
           <td>
-            <ul>
+            <ol>
               <li><p>Working Group on Arbitrary Detention (WGAD)</p></li>
               <li><p>Working Group on Enforced or Involuntary Disappearances (WGEID)</p></li>
               <li><p>Submission to Special Procedures</p></li>
               <li><p>Submitting information to Special Rapporteur</p></li>
-            </ul>
+            </ol>
           </td>
 
-          <td>
-            <ul>
-              <li><a href="https://www.ohchr.org/en/special-procedures/wg-arbitrary-detention/complaints-and-urgent-appeals">Link</a></li>
-              <li><a href="https://www.ohchr.org/en/special-procedures/wg-disappearances/reporting-disappearance-working-group">Link</a></li>
-              <li><a href="https://spsubmission.ohchr.org/">Link</a></li>
-              <li><a href="https://spinternet.ohchr.org/ViewAllCountryMandates.aspx?Type=TM">Link</a></li>
-            </ul>
+          <td style="text-align: center">
+            <a href="https://www.ohchr.org/en/special-procedures/wg-arbitrary-detention/complaints-and-urgent-appeals">Link</a> <br />
+            <a href="https://www.ohchr.org/en/special-procedures/wg-disappearances/reporting-disappearance-working-group">Link</a> <br />
+            <a href="https://spsubmission.ohchr.org/">Link</a> <br />
+            <a href="https://spinternet.ohchr.org/ViewAllCountryMandates.aspx?Type=TM">Link</a>
           </td>
         </tr>
 
         <tr>
           <td>ECOSOC</td>
           <td>
-            <li>Commission on the Status of Women</li>
+            Commission on the Status of Women
           </td>
           <td></td>
           <td></td>
-          <td>
-            <ul>
-              <li><a href="https://www.unwomen.org/en/csw/communications-procedure">Link</a></li>
-            </ul>
+          <td style="text-align: center">
+            <a href="https://www.unwomen.org/en/csw/communications-procedure">Link</a>
           </td>
         </tr>
       </table>
@@ -137,7 +131,7 @@
       // GDP per capita (avoiding countries with small pop)
       const getVal = (feat) => feat.properties.GDP_MD_EST / Math.max(1e5, feat.properties.POP_EST);
 
-      fetch("finalUpdatedAdminCountryData3.json")
+      fetch("finalUpdatedAdminCountryData4.json")
         .then((res) => res.json())
         .then((countries) => {
           const maxVal = Math.max(...countries.features.map(getVal));
@@ -152,7 +146,7 @@
             .polygonsData(countries.features.filter((d) => d.properties.ISO_A2 !== "AQ"))
             .polygonAltitude(0.06)
             .polygonCapColor((feat) => {
-              console.log(feat);
+              // console.log(feat);
               return feat?.properties?.color; // we can change the property with the country
 
               //return colorScale(getVal(feat));
@@ -167,6 +161,7 @@
                 .then((committeesDetails) => {
                   let committees = d.UNTreatyBody;
                   let institutions = d.regionalHumanRightsMechanism;
+                  console.log(institutions)
 
                   let UNTreatyBodyData = committeesDetails?.UNTrendyBody?.filter(function (item) {
                     return committees.indexOf(item?.committee) !== -1;
@@ -191,17 +186,17 @@
                     })} </div>`,
                   ];
 
-                  showPopup(`                  
+                  showPopup(`
                   <div class="top-part">
                     <h2>${d.BRK_NAME}</h2>
                     <button  onclick="hidePopup()" class="closeBtn"><i class="fa-sharp fa-solid fa-xmark"></i></button>
                   </div>
                   ${
-                    d?.UNTreatyBody[0].length === 0
+                    d?.UNTreatyBody[0]?.length === 0
                       ? `<h4>UN Treaty Body:</h4><p>Unfortunately in ${d.BRK_NAME}, no relevant international human rights complaint mechanisms are available for (rejected) asylum seekers. If you still wish to take initiative in the context, please assess the further possibilities applicable to all countries listed below. </p>`
                       : UNTreatyBody
                   }                  
-                  ${d.regionalHumanRightsMechanism[0].length === 0 ? `<h4>Regional Human Rights Mechanism:</h4><p>Unfortunately in ${d.BRK_NAME}, no Regional Human Rights Mechanism are available for (rejected) asylum seekers.</p>` : RegionalHuman}                      
+                  ${d.regionalHumanRightsMechanism[0]?.length === 0 ? `<h4>Regional Human Rights Mechanism:</h4><p>Unfortunately in ${d.BRK_NAME}, no Regional Human Rights Mechanism are available for (rejected) asylum seekers.</p>` : RegionalHuman}
                 </div>`);
                 });
             })
