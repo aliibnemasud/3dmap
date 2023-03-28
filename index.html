@@ -4,66 +4,16 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="index.css" />
-    <style>
-      body {
-        margin: 0;
-      }
-    </style>
+    <link rel="stylesheet" href="index.css" />    
     <script src="//unpkg.com/d3"></script>
     <script src="//unpkg.com/globe.gl"></script>
     <script src="https://kit.fontawesome.com/1e939a20d7.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <style>
-      #popup-container {
-        position: fixed;
-        top: 0%;
-        right: 0%;
-        display: none;
-        background-color: #fff;
-        padding: 1%;
-        border: 1px solid #ccc;
-        margin: 2%;
-        border-radius: 2%;
-        background-color: rgb(216, 248, 248);
-        width: 20%;
-        height: 60%;
-        overflow: scroll;
-      }
-
-      #popup-hover {
-        background-color: rgb(151, 98, 0);
-        padding: 5px;
-      }
-
-      #table {
-        position: fixed;
-        top: 30%;
-        bottom: 0%;
-        display: block;
-        /* background-color: #fff; */
-        padding: 1%;
-        /* border: 1px solid #ccc; */
-        /* margin: 2%; */
-        /* border-radius: 1%; */
-        /* background-color: rgb(216, 248, 248); */
-        width: 30%;
-        height: 60%;
-        /* overflow: scroll; */
-      }
-    </style>
-    <title>Country Data</title>
+    <title>Human Right Mechanism</title>
   </head>
   <body>
     <div id="globeViz"></div>
-
-    <div id="popup-container">
-      <!-- <div class="btnDiv">
-        <button  onclick="hidePopup()" class="closeBtn"><i class="fa-sharp fa-solid fa-xmark"></i></button>
-        </div> -->
-    </div>
-
+    <div id="popup-container"></div>
     <div id="table">
       <h3 style="color: azure; text-align: center;">HR Mechanisms Applicable in All States</h3>
       <table id="customers">
@@ -120,129 +70,10 @@
         </tr>
       </table>
     </div>
-
     <div id="title">
       <h1>Human Right Mechanism</h1>
     </div>
-
-    <script>
-      const colorScale = d3.scaleSequentialSqrt(d3.interpolateYlOrRd);
-
-      // GDP per capita (avoiding countries with small pop)
-      const getVal = (feat) => feat.properties.GDP_MD_EST / Math.max(1e5, feat.properties.POP_EST);
-
-      fetch("finalUpdatedAdminCountryData4.json")
-        .then((res) => res.json())
-        .then((countries) => {
-          const maxVal = Math.max(...countries.features.map(getVal));
-          colorScale.domain([0, maxVal]);
-
-          // console.log(countries)
-
-          const world = Globe()
-            .globeImageUrl("//unpkg.com/three-globe/example/img/earth-night.jpg")
-            .backgroundImageUrl("//unpkg.com/three-globe/example/img/night-sky.png")
-            .lineHoverPrecision(0)
-            .polygonsData(countries.features.filter((d) => d.properties.ISO_A2 !== "AQ"))
-            .polygonAltitude(0.06)
-            .polygonCapColor((feat) => {
-              // console.log(feat);
-              return feat?.properties?.color; // we can change the property with the country
-
-              //return colorScale(getVal(feat));
-              //console.log()
-            }) // color is coming from there
-            .polygonSideColor(() => "rgba(0, 100, 0, 0.15)") // ground color
-            .polygonStrokeColor(() => "#111")
-            .onPolygonClick(({ properties: d }) => {
-              let committeesDetailsData = [];
-              fetch("UNTrendyBody.json")
-                .then((res) => res.json())
-                .then((committeesDetails) => {
-                  let committees = d.UNTreatyBody;
-                  let institutions = d.regionalHumanRightsMechanism;
-                  console.log(institutions)
-
-                  let UNTreatyBodyData = committeesDetails?.UNTrendyBody?.filter(function (item) {
-                    return committees.indexOf(item?.committee) !== -1;
-                  });
-
-                  let regionalHumanRightsMechanismData = committeesDetails?.regionalOnes?.filter(function (item) {
-                    return institutions.indexOf(item?.institution) !== -1;
-                  });
-
-                  let UNTreatyBody = [
-                    `<div><h4>UN Treaty Body:</h4><ul>${UNTreatyBodyData?.map((un) => {
-                      return `<div>
-                              <p><strong>Institution:</strong> ${un?.abbreviations}</p>
-                              <p><a target="_blank" href=${un?.individualComplaintLink}>Individual Complaint</a></p>
-                              </div>`;
-                    }).join(" ")} </div>`,
-                  ];
-
-                  let RegionalHuman = [
-                    `<p>Regional Human Rights Mechanism:</p> <ul>${regionalHumanRightsMechanismData?.map((un) => {
-                      return `<li><a target="_blank" href=${un?.IndividualComplaint}>${un?.abbreviations}</a></li>`;
-                    })} </div>`,
-                  ];
-
-                  showPopup(`
-                  <div class="top-part">
-                    <h2>${d.BRK_NAME}</h2>
-                    <button  onclick="hidePopup()" class="closeBtn"><i class="fa-sharp fa-solid fa-xmark"></i></button>
-                  </div>
-                  ${
-                    d?.UNTreatyBody[0]?.length === 0
-                      ? `<h4>UN Treaty Body:</h4><p>Unfortunately in ${d.BRK_NAME}, no relevant international human rights complaint mechanisms are available for (rejected) asylum seekers. If you still wish to take initiative in the context, please assess the further possibilities applicable to all countries listed below. </p>`
-                      : UNTreatyBody
-                  }                  
-                  ${d.regionalHumanRightsMechanism[0]?.length === 0 ? `<h4>Regional Human Rights Mechanism:</h4><p>Unfortunately in ${d.BRK_NAME}, no Regional Human Rights Mechanism are available for (rejected) asylum seekers.</p>` : RegionalHuman}
-                </div>`);
-                });
-            })
-
-            /* .polygonLabel(
-              ({ properties: d }) => `
-          <div id="popup-hover" >
-            <b>${d.BRK_NAME}</b><br />
-          UN Treaty Body: <ul>${d.UNTreatyBody?.map((un) => {
-            return `<li>${un}</li>`;
-          })}</ul>
-            </div>
-        `) */
-
-            //
-            .onPolygonHover((hoverD) =>
-              world
-                .polygonAltitude((d) => (d === hoverD ? 0.12 : 0.06))
-                .polygonCapColor((d) => {
-                  //console.log("only d", d)
-                  // console.log('hoverD', hoverD)
-                  d === hoverD ? "steelblue" : colorScale(getVal(d));
-                })
-            )
-            .polygonsTransitionDuration(300)(document.getElementById("globeViz"));
-        });
-    </script>
-
-    <script>
-      const popup = document.querySelector("#popup-container");
-
-      function showPopup(data) {
-        popup.innerHTML = data;
-        popup.style.display = "block";
-      }
-
-      function hidePopup() {
-        popup.style.display = "none";
-        document.removeEventListener("click", hidePopupOnClickOutside);
-      }
-
-      function hidePopupOnClickOutside(event) {
-        if (!popup.contains(event.target)) {
-          hidePopup();
-        }
-      }
-    </script>
+    <script src="globe.js"></script>   
+    <script src="index.js"></script>
   </body>
 </html>

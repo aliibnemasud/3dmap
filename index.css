@@ -1,83 +1,78 @@
 body {
   font-family: poppins;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.popup {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    width: 300px;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    transform: translateY(-100%);
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .popup.active {
-    transform: translateY(0);
-  }
-  
-  .popup h2 {
-    margin-top: 0;
-  }
-  
-  .popup .close {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 18px;
-  }
-  
-  .popup p {
-    margin-bottom: 0;
-  }
+/* top right popup style */
+#popup-container {
+  position: fixed;
+  top: 0%;
+  right: 0%;
+  display: none;
+  background-color: #fff;
+  padding: 1%;
+  border: 1px solid #ccc;
+  margin: 2%;
+  border-radius: 2%;
+  background-color: rgb(216, 248, 248);
+  width: 20%;
+  height: 60%;
+  overflow-y: scroll;
+}
 
-  .closeBtn {
-    border: none;
-    background: transparent;
-    display: block;
-    text-align: center;
-  }
+#popup-hover {
+  background-color: rgb(151, 98, 0);
+  padding: 5px;
+}
 
-  .closeBtn i {
-    font-size: 40px;
-    cursor: pointer;   
-  }
-  .closeBtn i:hover {
-    color: red;
-  }
+.closeBtn {
+  border: none;
+  background: transparent;
+  display: block;
+  text-align: center;
+}
+.closeBtn i {
+  font-size: 40px;
+  cursor: pointer;
+}
+.closeBtn i:hover {
+  color: red;
+}
 
-  .btnDiv {
-    display: grid
-    /* text-align: center;
-    width: 100%;
-    margin: 0 auto; */
-  }
-
-  .top-part {
-    display: flex;
-    justify-content: space-between;   
-  }
-
+.top-part {
+  display: flex;
+  justify-content: space-between;
+}
 
 /* table style */
+
+#table {
+  position: fixed;
+  top: 30%;
+  bottom: 0%;
+  display: block;        
+  padding: 1%;       
+  width: 30%;
+  height: 60%;        
+}
+
 #customers {
   font-family: poppins;
   border-collapse: collapse;
-  width: 100%;  
+  width: 100%;
 }
 
-#customers td, #customers th {
+#customers td,
+#customers th {
   border: 1px solid #ddd;
   padding: 8px;
   font-size: small;
 }
 
-#customers tr{
-  background-color: rgba(216, 248, 248, 0.993); 
+#customers tr {
+  background-color: rgba(216, 248, 248, 0.993);
 }
 
 /* #customers tr:hover {background-color: #ddd;} */
@@ -86,7 +81,7 @@ body {
   padding-top: 10px;
   padding-bottom: 10px;
   text-align: left;
-  background-color: #3083FF;
+  background-color: #3083ff;
   color: white;
 }
 
@@ -99,4 +94,25 @@ body {
 
 #title h1 {
   color: #fff;
+}
+
+/* Custom Scroll Bar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #fff;
+  -webkit-border-radius: 0.625rem;
+  border-radius: 0.625rem;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 0.625rem;
+  border-radius: 0.625rem;
+  background: #dadce0;
+}
+
+.modal-open {
+  overflow: hidden;
 }
