@@ -41,7 +41,7 @@ fetch("finalUpdatedAdminCountryData4.json")
             let RegionalHuman = [
               `<h4 style="margin: 0;">Regional Human Rights Mechanism:</h4> <ul>${regionalHumanRightsMechanismData?.map((un) => {
                 return `<li><a target="_blank" href=${un?.IndividualComplaint}>${un?.abbreviations}</a></li>`;
-              })} </div>`,
+              }).join(" ")}</div>`,
             ];
 
             showPopup(`
