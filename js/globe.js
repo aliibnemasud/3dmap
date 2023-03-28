@@ -1,6 +1,6 @@
 const colorScale = d3.scaleSequentialSqrt(d3.interpolateYlOrRd);
 const getVal = (feat) => feat.properties.GDP_MD_EST / Math.max(1e5, feat.properties.POP_EST);
-fetch("finalUpdatedAdminCountryData4.json")
+fetch("../data/finalUpdatedAdminCountryData4.json")
   .then((res) => res.json())
   .then((countries) => {
     const maxVal = Math.max(...countries.features.map(getVal));
@@ -16,7 +16,7 @@ fetch("finalUpdatedAdminCountryData4.json")
       .polygonStrokeColor(() => "#111")
       .onPolygonClick(({ properties: d }) => {
         let committeesDetailsData = [];
-        fetch("UNTrendyBodyAndRegionalOnes.json")
+        fetch("../data/UNTrendyBodyAndRegionalOnes.json")
           .then((res) => res.json())
           .then((committeesDetails) => {
             let committees = d.UNTreatyBody;
