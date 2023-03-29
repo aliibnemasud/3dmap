@@ -1,5 +1,5 @@
 body {
-  font-family: poppins;
+  font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -54,7 +54,17 @@ body {
   left: 0%;
   display: block;        
   padding: 1%;       
+  width: 32%;
+}
+
+#tableBtn {
+  position: fixed;
+  bottom: 0%;
+  left: 0%;
+  display: block;        
+  padding: 1%;       
   width: 30%;
+  display: none;
 }
 
 #customers {

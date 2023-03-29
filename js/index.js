@@ -1,4 +1,6 @@
 const popup = document.querySelector("#popup-container");
+const table = document.querySelector("#table");
+const tableBtn = document.querySelector("#tableBtn");
 
 function showPopup(data) {
   popup.innerHTML = data;
@@ -8,6 +10,16 @@ function showPopup(data) {
 function hidePopup() {
   popup.style.display = "none";
   document.removeEventListener("click", hidePopupOnClickOutside);
+}
+
+function hideTable(){
+  table.style.display = "none";
+  tableBtn.style.display = "block";
+}
+
+function showTable(){
+  table.style.display = "block";
+  tableBtn.style.display = "none";  
 }
 
 function hidePopupOnClickOutside(event) {
