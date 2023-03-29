@@ -19,6 +19,7 @@ fetch("../data/finalUpdatedAdminCountryData4.json")
         fetch("../data/UNTrendyBodyAndRegionalOnes.json")
           .then((res) => res.json())
           .then((committeesDetails) => {
+            
             let committees = d.UNTreatyBody;
             let institutions = d.regionalHumanRightsMechanism;
             let UNTreatyBodyData = committeesDetails?.UNTrendyBody?.filter(function (item) {
@@ -28,6 +29,9 @@ fetch("../data/finalUpdatedAdminCountryData4.json")
             let regionalHumanRightsMechanismData = committeesDetails?.regionalOnes?.filter(function (item) {
               return institutions.indexOf(item?.institution) !== -1;
             });
+
+            console.log(institutions)
+
 
             let UNTreatyBody = [
               `<div><h4>UN Treaty Body:</h4><ul>${UNTreatyBodyData?.map((un) => {
@@ -54,7 +58,7 @@ fetch("../data/finalUpdatedAdminCountryData4.json")
                       ? `<h4>UN Treaty Body:</h4><p>Unfortunately in ${d.BRK_NAME}, no relevant international human rights complaint mechanisms are available for (rejected) asylum seekers. If you still wish to take initiative in the context, please assess the further possibilities applicable to all countries listed below. </p>`
                       : UNTreatyBody
                   }                  
-                  ${d.regionalHumanRightsMechanism[0]?.length === 0 ? `<h4>Regional Human Rights Mechanism:</h4><p>Unfortunately in ${d.BRK_NAME}, no Regional Human Rights Mechanism are available for (rejected) asylum seekers.</p>` : RegionalHuman}
+                  ${d.regionalHumanRightsMechanism[0]?.length === 0 || !d.regionalHumanRightsMechanism ? `<h4>Regional Human Rights Mechanism:</h4><p>Unfortunately in ${d.BRK_NAME}, no Regional Human Rights Mechanism are available for (rejected) asylum seekers.</p>` : RegionalHuman}
                 </div>`);
           });
       })

@@ -50,12 +50,11 @@ body {
 
 #table {
   position: fixed;
-  bottom: 7%;
+  bottom: 0%;
   left: 0%;
   display: block;        
   padding: 1%;       
   width: 30%;
-  height: 60%;        
 }
 
 #customers {

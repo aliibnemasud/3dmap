@@ -70,8 +70,8 @@
     },
     {
       "institution": "Frontex",
-      "abbreviations": "",
-      "IndividualComplaint": "https://microsite.frontex.europa.eu/en/Complaints"
+      "abbreviations": "Frontex",
+      "IndividualComplaint": "https://frontex.europa.eu"
     },
     {
       "institution": "ACHPR",
@@ -86,7 +86,7 @@
     {
       "institution": "IACHR",
       "abbreviations": "Inter-American Commission on Human Rights",
-      "IndividualComplaint": ""
+      "IndividualComplaint": "https://www.oas.org/en/iachr/"
     },
     {
       "institution": "ACtHPR",
