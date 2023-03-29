@@ -50,6 +50,7 @@ fetch("../data/finalUpdatedAdminCountryData4.json")
                       <div>
                         <li><p>${un?.abbreviations}</p></li>
                         <p><a target="_blank" href=${un?.individualComplaintLink}>Individual Complaint</a></p>
+                        <p><a target="_blank" href=${un?.enquiry}>Inquiry</a></p>
                       </div>`;
                   }).join(" ")}
               </div>`,
