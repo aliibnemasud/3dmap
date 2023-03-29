@@ -15,37 +15,51 @@ fetch("../data/finalUpdatedAdminCountryData4.json")
       .polygonSideColor(() => "rgba(0, 100, 0, 0.15)") // ground color
       .polygonStrokeColor(() => "#111")
       .onPolygonClick(({ properties: d }) => {
-        let committeesDetailsData = [];
+        
+
+        if (d.UNTreatyBody === undefined) {        
+          showPopup(`
+                  <div class="top-part">
+                    <h2 style="margin: 0;">${d.BRK_NAME}</h2>
+                    <button  onclick="hidePopup()" class="closeBtn"><i class="fa-sharp fa-solid fa-xmark"></i></button>
+                  </div>
+                  <p>Unfortunately in <strong>${d.BRK_NAME}</strong>, no relevant international human rights complaint mechanisms are available for (rejected) asylum seekers. If you still wish to take initiative in the context, please assess the further possibilities applicable to all countries listed below. </p>                  
+                  `);
+          return;
+        }
         fetch("../data/UNTrendyBodyAndRegionalOnes.json")
           .then((res) => res.json())
           .then((committeesDetails) => {
-            
-            let committees = d.UNTreatyBody;
-            let institutions = d.regionalHumanRightsMechanism;
+            let committees = d?.UNTreatyBody;
+            let institutions = d?.regionalHumanRightsMechanism;
             let UNTreatyBodyData = committeesDetails?.UNTrendyBody?.filter(function (item) {
               return committees.indexOf(item?.committee) !== -1;
             });
-            
+
             let regionalHumanRightsMechanismData = committeesDetails?.regionalOnes?.filter(function (item) {
               return institutions.indexOf(item?.institution) !== -1;
             });
 
-            console.log(institutions)
-
+            // console.log({institutions})
 
             let UNTreatyBody = [
-              `<div><h4>UN Treaty Body:</h4><ul>${UNTreatyBodyData?.map((un) => {
-                return `<div>
-                              <li><p>${un?.abbreviations}</p></li>
-                              <p><a target="_blank" href=${un?.individualComplaintLink}>Individual Complaint</a></p>
-                              </div>`;
-              }).join(" ")} </div>`,
+              `<div>
+                <h4>UN Treaty Body:</h4>
+                  <ul>${UNTreatyBodyData?.map((un) => {
+                    return `
+                      <div>
+                        <li><p>${un?.abbreviations}</p></li>
+                        <p><a target="_blank" href=${un?.individualComplaintLink}>Individual Complaint</a></p>
+                      </div>`;
+                  }).join(" ")}
+              </div>`,
             ];
-
             let RegionalHuman = [
-              `<h4 style="margin: 0;">Regional Human Rights Mechanism:</h4> <ul>${regionalHumanRightsMechanismData?.map((un) => {
-                return `<li><a target="_blank" href=${un?.IndividualComplaint}>${un?.abbreviations}</a></li>`;
-              }).join(" ")}</div>`,
+              `<h4 style="margin: 0;">Regional Human Rights Mechanism:</h4> <ul>${regionalHumanRightsMechanismData
+                ?.map((un) => {
+                  return `<li><a target="_blank" href=${un?.IndividualComplaint}>${un?.abbreviations}</a></li>`;
+                })
+                .join(" ")}</div>`,
             ];
 
             showPopup(`
@@ -58,7 +72,7 @@ fetch("../data/finalUpdatedAdminCountryData4.json")
                       ? `<h4>UN Treaty Body:</h4><p>Unfortunately in ${d.BRK_NAME}, no relevant international human rights complaint mechanisms are available for (rejected) asylum seekers. If you still wish to take initiative in the context, please assess the further possibilities applicable to all countries listed below. </p>`
                       : UNTreatyBody
                   }                  
-                  ${d.regionalHumanRightsMechanism[0]?.length === 0 || !d.regionalHumanRightsMechanism ? `<h4>Regional Human Rights Mechanism:</h4><p>Unfortunately in ${d.BRK_NAME}, no Regional Human Rights Mechanism are available for (rejected) asylum seekers.</p>` : RegionalHuman}
+                  ${d?.regionalHumanRightsMechanism[0]?.length === 0 || !d?.regionalHumanRightsMechanism ? `<h4>Regional Human Rights Mechanism:</h4><p>Unfortunately in ${d.BRK_NAME}, no Regional Human Rights Mechanism are available for (rejected) asylum seekers.</p>` : RegionalHuman}
                 </div>`);
           });
       })
