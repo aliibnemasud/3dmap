@@ -1,5 +1,6 @@
 body {
   font-family: 'Poppins', sans-serif;
+  /* font-family: 'Poiret One', cursive; */
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -14,12 +15,12 @@ body {
   background-color: #fff;
   padding: 1%;
   border: 1px solid #ccc;
-  margin: 2%;
-  border-radius: 2%;
+  margin: 2%;  
   background-color: rgb(216, 248, 248);
   width: 20%;
   height: 60%;
   overflow-y: scroll;
+  font-size: small;
 }
 
 #popup-hover {
@@ -51,10 +52,10 @@ body {
 #table {
   position: fixed;
   bottom: 0%;
-  left: 0%;
-  display: block;        
+  left: 0%;         
   padding: 1%;       
-  width: 32%;
+  width: 20%;
+  display: none;
 }
 
 #tableBtn {
@@ -63,8 +64,7 @@ body {
   left: 0%;
   display: block;        
   padding: 1%;       
-  width: 30%;
-  display: none;
+  width: 30%;  
 }
 
 #customers {
@@ -77,7 +77,7 @@ body {
 #customers th {
   border: 1px solid #ddd;
   padding: 8px;
-  font-size: small;
+  font-size: x-small;
 }
 
 #customers tr {
@@ -98,7 +98,7 @@ body {
 #title {
   position: fixed;
   top: 0%;
-  left: 38%;
+  left: 1%;
 }
 
 #title h1 {
