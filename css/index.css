@@ -125,3 +125,19 @@ body {
 .modal-open {
   overflow: hidden;
 }
+
+
+/* think evolve */
+
+#footer {
+  position: fixed;
+  bottom: 0%;
+  right: 1%;  
+}
+
+#footer p {
+  color: #fff;
+}
+#footer a {
+  color: #ffffff;
+}
