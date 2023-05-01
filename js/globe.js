@@ -15,7 +15,9 @@ fetch("../data/finalUpdatedAdminCountryData4.json")
       .polygonCapColor((feat) => feat?.properties?.color) // polygon color coming from color property
       .polygonSideColor(() => "rgba(0, 100, 0, 0.15)") // ground color
       .polygonStrokeColor(() => "#111")
-      .onPolygonClick(({ properties: d }) => {        
+      .onPolygonClick(({ properties: d }) => {
+        
+       
 
         if (d.UNTreatyBody === undefined) {        
           showPopup(`
@@ -42,6 +44,8 @@ fetch("../data/finalUpdatedAdminCountryData4.json")
 
             // console.log({institutions})
 
+            const reservation = d?.reservations === undefined ? '':`<strong>Attention:</strong> When preparing a submission, <strong>${d.BRK_NAME}</strong> has made a reservation on article(s) <b>${d?.reservations}</b> to the Convention of this Committee`
+
             let UNTreatyBody = [
               `<div>
                 <h4>UN Treaty Body:</h4>
@@ -50,9 +54,11 @@ fetch("../data/finalUpdatedAdminCountryData4.json")
                       <div>
                         <li><p>${un?.abbreviations}</p></li>
                         <p><a target="_blank" href=${un?.individualComplaintLink}>Individual Complaint</a></p>
-                        <p><a target="_blank" href=${un?.enquiry}>Inquiry</a></p>
+                        <p><a target="_blank" href=${un?.enquiry}>Inquiry</a></p>                        
                       </div>`;
                   }).join(" ")}
+
+                  ${reservation}
               </div>`,
             ];
             let RegionalHuman = [
