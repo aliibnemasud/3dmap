@@ -105,6 +105,14 @@ body {
   color: #fff;
 }
 
+.downloadBtn {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  color: #3083ff;
+  cursor: pointer;
+}
+
 /* Custom Scroll Bar */
 ::-webkit-scrollbar {
   width: 8px;
@@ -141,3 +149,40 @@ body {
 #footer a {
   color: #ffffff;
 }
+
+@media (max-width: 480px) {
+  #title h1 {
+    font-size: small;
+    position: fixed;
+    top: 1%;
+    right: 28%;
+  }  
+
+  #popup-container {
+    position: fixed;
+    top: 3%;
+    right: 2%;   
+    width: 80%;
+    height: 50%;   
+    font-size: x-small;
+    padding: 5%;
+  }
+
+  .closeBtn i {
+    font-size: 25px;
+  }
+
+  .top-part h2 {
+    font-size: small;
+  }
+
+  #table {
+    width: 90%;
+  }
+
+  #footer {
+    font-size: x-small;
+    right: 3%;   
+  }
+
+ }

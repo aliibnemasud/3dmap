@@ -9,27 +9,27 @@ fetch("../data/finalUpdatedAdminCountryData4.json")
       .globeImageUrl("//unpkg.com/three-globe/example/img/earth-night.jpg")
       .backgroundImageUrl("//unpkg.com/three-globe/example/img/night-sky.png")
       .lineHoverPrecision(0)
+      .labelText(countries?.properties?.BRK_NAME)
       .polygonsData(countries.features.filter((d) => d.properties.ISO_A2 !== "AQ"))
       .polygonAltitude(0.06)
       .polygonCapColor((feat) => feat?.properties?.color) // polygon color coming from color property
       .polygonSideColor(() => "rgba(0, 100, 0, 0.15)") // ground color
       .polygonStrokeColor(() => "#111")
-      .onPolygonClick(({ properties: d }) => {
-        
+      .onPolygonClick(({ properties: d }) => {        
 
         if (d.UNTreatyBody === undefined) {        
           showPopup(`
-                  <div class="top-part">
+                  <div class="top-part content">
                     <h2 style="margin: 0;">${d.BRK_NAME}</h2>
                     <button  onclick="hidePopup()" class="closeBtn"><i class="fa-sharp fa-solid fa-xmark"></i></button>
                   </div>
-                  <p>Unfortunately in <strong>${d.BRK_NAME}</strong>, no relevant international human rights complaint mechanisms are available for (rejected) asylum seekers. If you still wish to take initiative in the context, please assess the further possibilities applicable to all countries listed below. </p>                  
+                  <p>In <strong>${d.BRK_NAME}</strong>, there are no dedicated international human rights complaint mechanisms for (rejected) asylum seekers. Please check other options available for all countries in the pop-up window at the bottom left.</p>
                   `);
           return;
         }
         fetch("../data/UNTrendyBodyAndRegionalOnes.json")
           .then((res) => res.json())
-          .then((committeesDetails) => {
+          .then((committeesDetails) => {            
             let committees = d?.UNTreatyBody;
             let institutions = d?.regionalHumanRightsMechanism;
             let UNTreatyBodyData = committeesDetails?.UNTrendyBody?.filter(function (item) {
@@ -65,15 +65,15 @@ fetch("../data/finalUpdatedAdminCountryData4.json")
 
             showPopup(`
                   <div class="top-part">
-                    <h2 style="margin: 0;">${d.BRK_NAME}</h2>
+                    <h2 style="margin: 0;">${d.BRK_NAME} <button  onclick="downloadPdf()" class="downloadBtn"><i class="fa-solid fa-file-arrow-down"></i></button> </h2>
                     <button  onclick="hidePopup()" class="closeBtn"><i class="fa-sharp fa-solid fa-xmark"></i></button>
                   </div>
                   ${
                     d?.UNTreatyBody[0]?.length === 0
-                      ? `<h4>UN Treaty Body:</h4><p>Unfortunately in ${d.BRK_NAME}, no relevant international human rights complaint mechanisms are available for (rejected) asylum seekers. If you still wish to take initiative in the context, please assess the further possibilities applicable to all countries listed below. </p>`
+                      ? `<h4>UN Treaty Body:</h4><p> In <strong>${d.BRK_NAME}</strong>, no relevant international human rights complaint mechanisms are available for (rejected) asylum seekers. If you still wish to take initiative in the context, please assess the further possibilities applicable to all countries listed below. </p>`
                       : UNTreatyBody
                   }                  
-                  ${d?.regionalHumanRightsMechanism[0]?.length === 0 || !d?.regionalHumanRightsMechanism ? `<h4>Regional Human Rights Mechanism:</h4><p>Unfortunately in ${d.BRK_NAME}, no Regional Human Rights Mechanism are available for (rejected) asylum seekers.</p>` : RegionalHuman}
+                  ${d?.regionalHumanRightsMechanism[0]?.length === 0 || !d?.regionalHumanRightsMechanism ? `<h4>Regional Human Rights Mechanism:</h4><p>In <strong>${d.BRK_NAME}</strong>, no Regional Human Rights Mechanism are available for (rejected) asylum seekers.</p>` : RegionalHuman}
                 </div>`);
           });
       })

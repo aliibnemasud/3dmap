@@ -1,6 +1,7 @@
 const popup = document.querySelector("#popup-container");
 const table = document.querySelector("#table");
 const tableBtn = document.querySelector("#tableBtn");
+const content = document.getElementById("content");
 
 function showPopup(data) {
   popup.innerHTML = data;
@@ -12,14 +13,14 @@ function hidePopup() {
   document.removeEventListener("click", hidePopupOnClickOutside);
 }
 
-function hideTable(){
+function hideTable() {
   table.style.display = "none";
   tableBtn.style.display = "block";
 }
 
-function showTable(){
+function showTable() {
   table.style.display = "block";
-  tableBtn.style.display = "none";  
+  tableBtn.style.display = "none";
 }
 
 function hidePopupOnClickOutside(event) {
